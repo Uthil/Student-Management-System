@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2025 at 08:52 PM
+-- Generation Time: Jan 29, 2026 at 05:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `student_management_db`
+-- Database: `antoniou_137979`
 --
 
 -- --------------------------------------------------------
@@ -112,7 +112,7 @@ CREATE TABLE `users` (
   `Userid` int(11) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Username` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `Role` enum('Καθηγητής','Φοιτητής') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -121,12 +121,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Userid`, `Email`, `Username`, `Password`, `Role`) VALUES
-(1, 'std_user1@mail.com', 'std_user1', '1234567890aA!', 'Φοιτητής'),
-(2, 'std_user2@mail.com', 'std_user2', '1234567890aA!', 'Φοιτητής'),
-(3, 'std_user3@mail.com', 'std_user3', '1234567890aA!', 'Φοιτητής'),
-(5, 'tch_user1@mail.com', 'tch_user1', '1234567890aA!', 'Καθηγητής'),
-(6, 'tch_user2@mail.com', 'tch_user2', '1234567890aA!', 'Καθηγητής'),
-(7, 'tch_user3@mail.com', 'tch_user3', '1234567890aA!', 'Καθηγητής');
+(1, 'std_user1@mail.com', 'std_user1', '$2y$10$4T9uscJkESsyw4bYcuu/huFhvJt6EBtK/yR491K3HjU3nLzqBANcu', 'Φοιτητής'),
+(2, 'std_user2@mail.com', 'std_user2', '$2y$10$Brry9TIxzVvph/tSpGDOv.Lp8fm5OviLwlamSASEUzBoSFicuJH/y', 'Φοιτητής'),
+(3, 'std_user3@mail.com', 'std_user3', '$2y$10$7uQN6GwLDD6/F5hCy5.kAukUkjvwZMqEx/mlRIZDX1YbitTsEKKfO', 'Φοιτητής'),
+(5, 'tch_user1@mail.com', 'tch_user1', '$2y$10$MbFByknPWeY8Qek9W7aIROQdBrLokmwLD5JAxOJstoB8vzsnUmycO', 'Καθηγητής'),
+(6, 'tch_user2@mail.com', 'tch_user2', '$2y$10$O84kvYsV7X77/Z7zEYTkoenVp9t2.5Di8v3AcFYgeE15Asm8bAB6a', 'Καθηγητής'),
+(7, 'tch_user3@mail.com', 'tch_user3', '$2y$10$XEl9caYNyQTRx9cETKOt8.g48Jp7TLpXdi6P1E4YVGVSvUW9DscJ.', 'Καθηγητής');
 
 -- --------------------------------------------------------
 
@@ -212,7 +212,7 @@ ALTER TABLE `ekfonisiergasias`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `ypovlithisaergasia`
