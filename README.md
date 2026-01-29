@@ -1,2 +1,32 @@
-# MSC_in_PHP
-Στόχος είναι να συνεχίσουμε την υλοποίηση της πλατφόρμας η οποία ξεκίνησε στη ΓΕ2, για τη διαχείριση προφίλ και εργασιών φοιτητών σε ένα μεταπτυχιακό πρόγραμμα σπουδών, με την ενσωμάτωση δυνατοτήτων που βασίζονται σε HTML, PHP, JavaScript και SQL.
+## Student Management System 🎓
+A secure, full-stack web application designed to manage university student records, course enrollments, and academic assignments. This project showcases the evolution from a static HTML academic prototype to a dynamic, production-ready PHP application.
+
+![Static badge](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white) ![Static Badge](https://img.shields.io/badge/Security-Prepared_Statements-green)
+
+### 🛡️ Key Technical Enhancements (Refactored)
+- Secure Authentication: Implemented password hashing using Bcrypt (password_hash) to ensure industry-standard credential protection .
+
+- SQL Injection Protection: Refactored all database queries to use Prepared Statements and Parameter Binding, eliminating common web vulnerabilities.   
+
+- Data Interoperability: Developed an XML/XSLT reporting engine that dynamically transforms student data into formatted HTML reports.   
+
+- Robust Architecture: Organized codebase into a clean directory structure with a dedicated /database folder and secure configuration handling via .gitignore .
+
+### 🚀 Main Features
+- Role-Based Access Control: Distinct dashboards and permissions for Students and Professors.   
+
+- Course & Assignment Workflow: Real-time management of academic tasks and submissions.
+
+- Work-in-Progress Handling: Integrated professional "Placeholder" views and TODO markers for future feature development (e.g., Assignment View) .
+
+### ⚙️ Installation & Setup (XAMPP)
+- Clone the repository: git clone https://github.com/Uthil/Student-Management-System.git
+
+- Database: Import database/student_db.sql via phpMyAdmin. Note: The schema includes anonymized seed data for testing.   
+
+- Config: Rename config.sample.php to config.php and update your local credentials.
+
+- PHP Extension: Ensure the xsl extension is enabled in your php.ini for the reporting features to work.
+
+### 🔄 Project Evolution
+This repository documents the transition from a legacy static frontend (MSC) to a modern dynamic backend system. View the original prototype [here](https://github.com/Uthil/MSC) .
