@@ -29,12 +29,15 @@
     $file = $_POST['file'];
     $mathima = $_POST['mathima'];
     // Δημηιουργεία νέας εργασίας
-    $sql2 = "INSERT INTO ekfonisiergasias(Title, Ekfonisi, file, Course_id, Userid) VALUES('$title', '$ekfonisi', '$file', '$mathima', $userid)";
-    $result2 = $con->query($sql2);
-    if ($result2 == FALSE) {
+    $$stmt = $con->prepare("INSERT INTO ekfonisiergasias(Title, Ekfonisi, file, Course_id, Userid) VALUES (?, ?, ?, ?, ?)");
+	  $stmt->bind_param("ssssi", $title, $ekfonisi, $file, $mathima, $userid);
+    $result = $stmt->execute();
+    if ($result == FALSE) {
+      $stmt->close();
       $con->close();
       echo '<script>alert("Error: Δεν ήταν δυνατή η αποθήκευση..."); window.location="dimiourgia_ekfonisis.php";</script>';
     } else {
+      $stmt->close();
       $con->close();
       echo '<script>alert("Επιτυχής αποθήκευση!"); window.location="home.php";</script>';
     }
