@@ -20,9 +20,11 @@
   include("config.php");
   $userid = $_SESSION['Userid'];
   // Έλεγχος αν ο φοιτητής έχει ήδη profile
-  $sql1 = "SELECT * FROM userprofile WHERE Userid=$userid";
-  $result = $con->query($sql1);
-  $n = $result->num_rows;
+  $stmt = $con->prepare("SELECT * FROM userprofile WHERE Userid=?");
+	$stmt->bind_param("i", $userid);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$n = $result->num_rows;
   if ($n > 0) {
     $row = $result->fetch_assoc();
     $onomateponymo = $row['Name'];
@@ -41,26 +43,32 @@
     $youtube = $_POST['youtube'];
     $instagram = $_POST['instagram'];
     $twitter = $_POST['twitter'];
+    $stmt->close();
     if ($n == 0) {
       // Δημιουργία νέου προφίλ
-      $sql2 = "INSERT INTO userprofile(Userid, Name, Profession, Linkedin, Facebook, YouTube, Instagram, Twitter) VALUES($userid, '$onomateponymo', '$epaggelma', '$linkedin', '$facebook', '$youtube', '$instagram', '$twitter')";
-      $result2 = $con->query($sql2);
+      $stmt2 = $con->prepare("INSERT INTO userprofile(Userid, Name, Profession, Linkedin, Facebook, YouTube, Instagram, Twitter) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+	    $stmt2->bind_param("isssssss", $userid, $onomateponymo, $epaggelma, $linkedin, $facebook, $youtube, $instagram, $twitter);
+      $result2 = $stmt2->execute();
       if ($result2 == FALSE) {
+        $stmt2->close();
         $con->close();
         echo '<script>alert("Error: Δεν ήταν δυνατή η αποθήκευση..."); window.location="profile.php";</script>';
       } else {
+        $stmt2->close();
         $con->close();
         echo '<script>alert("Επιτυχής αποθήκευση προφίλ."); window.location="home.php";</script>';
       }
     } else {
       // Ενημέρωση του προφίλ
-      $sql3 = "UPDATE userprofile SET Name = '$onomateponymo', Profession = '$epaggelma', Linkedin = '$linkedin', Facebook = '$facebook', YouTube = '$youtube', Instagram = '$instagram', Twitter = '$twitter' WHERE Userid = $userid";
-      echo $sql3;
-      $result3 = $con->query($sql3);
+      $stmt3 = $con->prepare("UPDATE userprofile SET Name = ?, Profession = ?, Linkedin = ?, Facebook = ?, YouTube = ?, Instagram = ?, Twitter = ? WHERE Userid = ?");
+      $stmt3->bind_param("sssssssi", $onomateponymo, $epaggelma, $linkedin, $facebook, $youtube, $instagram, $twitter, $userid);
+      $result3 = $stmt3->execute();
       if ($result3 == FALSE) {
+        $stmt3->close();
         $con->close();
         echo '<script>alert("Error: Δεν ήταν δυνατή η ενημέρωση..."); window.location="profile.php";</script>';
       } else {
+        $stmt3->close();
         $con->close();
         echo '<script>alert("Επιτυχής ενημέρωση προφίλ."); window.location="home.php";</script>';
       }
