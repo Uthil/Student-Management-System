@@ -28,5 +28,13 @@ A secure, full-stack web application designed to manage university student recor
 
 - PHP Extension: Ensure the xsl extension is enabled in your php.ini for the reporting features to work.
 
+### 🎓 Project Origin & Context
+This project was originally developed as a graded assignment for the PLH23 (Web Technologies) module at the Hellenic Open University (HOU) during the 2024-25 academic year.
+
+Post-submission, the codebase underwent a significant architectural refactor to implement:
+ - Industry-standard security (Bcrypt, Prepared Statements).
+ - Clean code directory structures.
+ - Professional documentation practices.
+
 ### 🔄 Project Evolution
 This repository documents the transition from a legacy static frontend (MSC) to a modern dynamic backend system. View the original prototype [here](https://github.com/Uthil/MSC) .
