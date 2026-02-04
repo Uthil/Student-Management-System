@@ -36,18 +36,24 @@
       <!ELEMENT link (#PCDATA)>
 			]>";
 
-  $query1 = "SELECT * FROM users WHERE Userid='$studentId'";
-  $result1 = mysqli_query($con, $query1);
-  $student = mysqli_fetch_array($result1);
+  $stmt = $con->prepare("SELECT * FROM users WHERE Userid= ?");
+  $stmt->bind_param("i", $studentId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $student = $result->fetch_assoc();
+  $stmt->close();
 
-  $query2 = "SELECT * FROM userprofile WHERE Userid='$studentId'";
-  $result2 = mysqli_query($con, $query2);
+  $stmt2 = $con->prepare("SELECT * FROM userprofile WHERE Userid=?");
+  $stmt2->bind_param("i", $studentId);
+  $stmt2->execute();
+  $result2 = $stmt2->get_result();
   $n = $result2->num_rows;
   if ($n > 0) {
     $profile = mysqli_fetch_array($result2);
   } else {
     $profile = '';
   }
+  $stmt2->close();
 
   $create_xml .= "<student studentID='$studentId'>";
 
@@ -62,8 +68,10 @@
     $create_xml .= "<Twitter>" . $profile['Twitter'] . "</Twitter>";
   }
 
-  $query3 = "SELECT * FROM ypovlithisaergasia WHERE Userid='$studentId'";
-  $result3 = mysqli_query($con, $query3);
+  $stmt3 = $con->prepare("SELECT * FROM ypovlithisaergasia WHERE Userid=?");
+  $stmt3->bind_param("i", $studentId);
+  $stmt3->execute();
+  $result3 = $stmt3->get_result();
   $n = $result3->num_rows;
   if ($n > 0) {
 
@@ -75,6 +83,7 @@
       $create_xml .= "</ergasia>";
     }
   }
+  $stmt3->close();
 
   $create_xml .= "</student>";
 
@@ -96,6 +105,7 @@
   } else {
     echo $xsl->transformToXML($doc);
   }
+  $con->close();
   ?>
   </div>
 
